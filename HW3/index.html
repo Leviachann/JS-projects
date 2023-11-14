@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    canvas {
+        border:1px solid #d3d3d3;
+        background-color: #f1f1f1;
+    }
+</style>
+</head>
+<body onload="startGame()">
+<script>
+var myGamePiece;
+var myBackground;
+var myBalls;
+var someGamePiece;
+var playerdoor;
+var enemydoor;
+
+var playerPoints = 0;
+var enemyPoints = 0;
+var playSoundClass = 'is-playing';
+var assetsUrl = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/',
+    sound = [
+      'smb3_1-up.mp3',
+      'smb3_nspade_match.mp3',
+      'smb3_bonus_game_no_match.mp3'
+    ],
+    soundSuccess = new Audio(assetsUrl + sound[0]),
+    soundMatch = new Audio(assetsUrl + sound[1]),
+    soundNoMatch = new Audio(assetsUrl + sound[2]);
+
+function startGame() {
+    myGamePiece = new component(120, 120, "media/PLAYERS.svg", 300, 405, "image");
+    someGamePiece = new component(120, 120, "media/PLAYERS2.svg", 1450, 405, "image");
+    myBalls = new component(60, 60, "media/balll.svg", 902, 435, "image");
+    myBackground = new component(1865, 930, "media/stadium.svg", 0, 0, "image");
+    playerdoor = new component(30, 155, "white", 50, 390);
+    enemydoor = new component(30, 155, "white", 1789, 390);
+    myGameArea.start();
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowUp') move('up');
+        else if (e.key === 'ArrowDown') move('down');
+        else if (e.key === 'ArrowLeft') move('left');
+        else if (e.key === 'ArrowRight') move('right');
+    });
+
+    document.addEventListener('keyup', function (e) {
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') clearmove();
+    });
+}
+
+var myGameArea = {
+    canvas: document.createElement("canvas"),
+    start: function() {
+        this.canvas.width = 1865;
+        this.canvas.height = 930;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.frameNo = 0;
+        this.interval = setInterval(updateGameArea, 20);
+    },
+    clear: function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+    stop: function() {
+        clearInterval(this.interval);
+    }
+}
+
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    if (type == "image") {
+        this.image = new Image();
+        this.image.src = color;
+    }
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x = x;
+    this.y = y;    
+    this.originalX = x; 
+    this.originalY = y;
+    this.update = function() {
+        ctx = myGameArea.context;
+        if (type == "image") {
+            ctx.drawImage(this.image, 
+                this.x, 
+                this.y,
+                this.width, this.height);
+        } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+    }
+    this.newPos = function() {
+        if (this.x < 0) this.x = 0;
+        if (this.y < 0) this.y = 0;
+        if (this.x + this.width > myGameArea.canvas.width) this.x = myGameArea.canvas.width - this.width;
+        if (this.y + this.height > myGameArea.canvas.height) this.y = myGameArea.canvas.height - this.height;
+        
+        this.x += this.speedX;
+        this.y += this.speedY;        
+    }    
+    this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            crash = false;
+        }
+        return crash; 
+    } 
+}
+
+function updateGameArea() {
+    myGameArea.clear();
+    myBackground.newPos();    
+    myBackground.update();
+    playerdoor.newPos();
+    playerdoor.update();
+    enemydoor.newPos();
+    enemydoor.update();
+    someGamePiece.newPos();    
+
+    updateEnemyPosition();
+
+    myBalls.newPos();    
+    myBalls.update();
+    
+    someGamePiece.update();
+    myGamePiece.newPos();    
+    myGamePiece.update();
+
+    if (myGamePiece.crashWith(myBalls)) {
+        var dx = myBalls.x - myGamePiece.x;
+        var dy = myBalls.y - myGamePiece.y;
+        var distance = Math.sqrt(dx * dx + dy * dy);
+        dx /= distance;
+        dy /= distance;
+
+        myBalls.speedX = -myBalls.speedX + dx * 2;
+        myBalls.speedY = -myBalls.speedY + dy * 2;
+    }
+    
+    if (myBalls.x < 0 || myBalls.x + myBalls.width > myGameArea.canvas.width) {
+        myBalls.speedX = -myBalls.speedX;
+    }
+    if (myBalls.y < 0 || myBalls.y + myBalls.height > myGameArea.canvas.height) {
+        myBalls.speedY = -myBalls.speedY;
+    }
+    
+    if (myBalls.crashWith(someGamePiece)) {
+        var dx2 = myBalls.x - someGamePiece.x;
+        var dy2 = myBalls.y - someGamePiece.y;
+        var distance2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+        dx2 /= distance2;
+        dy2 /= distance2;
+
+        myBalls.speedX = -myBalls.speedX + dx2 * 2;
+        myBalls.speedY = -myBalls.speedY + dy2 * 2;
+    }
+    
+    if (myBalls.crashWith(playerdoor)) {
+        enemyPoints++; 
+        resetGame();
+        soundNoMatch.play(); 
+    } else if (myBalls.crashWith(enemydoor)) {
+        playerPoints++; 
+        resetGame();
+        soundMatch.play(); 
+    }
+
+    updatePointsLabel();
+}
+
+function updateEnemyPosition() {
+    var dx = myBalls.x - someGamePiece.x + 59;
+    var dy = myBalls.y - someGamePiece.y;
+    var angle = Math.atan2(dy, dx);
+    var speed = 2; 
+    someGamePiece.speedX = Math.cos(angle) * speed;
+    someGamePiece.speedY = Math.sin(angle) * speed;
+}
+
+function move(dir) {
+    myGamePiece.image.src = "media/PLAYERS.svg";
+    if (dir == "up") {myGamePiece.speedY = -5; }
+    if (dir == "down") {myGamePiece.speedY = 5; }
+    if (dir == "left") {myGamePiece.speedX = -5; }
+    if (dir == "right") {myGamePiece.speedX = 5; }
+}
+
+function clearmove() {
+    myGamePiece.image.src = "media/PLAYERS.svg";
+    myGamePiece.speedX = 0; 
+    myGamePiece.speedY = 0; 
+}
+
+function updatePointsLabel() {
+    var ctx = myGameArea.context;
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText("Player points: " + playerPoints + " | Enemy points: " + enemyPoints, 10, 30);
+}
+
+function resetGame() {
+    myGamePiece.x = myGamePiece.originalX;
+    myGamePiece.y = myGamePiece.originalY;
+    myBalls.x = myBalls.originalX;
+    myBalls.y = myBalls.originalY;
+    someGamePiece.x = someGamePiece.originalX;
+    someGamePiece.y = someGamePiece.originalY;
+    myBalls.speedX = 0;
+    myBalls.speedY = 0;
+}
+</script>
+</body>
+</html>

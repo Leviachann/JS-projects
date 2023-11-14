@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: whitesmoke;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        
+        .container {
+            position: relative;
+        }
+        
+        .mySlides {
+            display: none;
+        }
+        
+        .cursor {
+            cursor: pointer;
+        }
+        
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 40%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, 0.8); 
+        }
+
+        .carouselContainer {
+            position: relative;
+            margin: auto;
+            overflow: hidden;
+            width: 100%;
+            height: 150px;
+        }
+
+        .carouselOfImages {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            overflow: hidden;
+            cursor: grab; 
+        }
+
+        .carouselOfImages:active {
+            cursor: grabbing; 
+        }
+
+        .carouselImage {
+            flex: 0 0 20%;
+            max-width: 20%;
+            padding: 24px;
+            text-align: center;
+            transition: transform 0.5s;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+        .carouselImage:hover {
+            transform: scale(1.1);
+        }
+        .carouselImage img {
+            width: 100%; 
+            height: auto;
+        }
+
+        .carouselImage:hover {
+            transform: scale(1.1);
+        }
+        .mySlides>img{
+          height: 70vh;
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <div class="mySlides">
+      <img src="media/0car.png" style="width:100%">
+    </div>
+  
+    <div class="mySlides">
+      <img src="media/0daz.png" style="width:100%">
+    </div>
+  
+    <div class="mySlides">
+      <img src="media/0fyozai.png" style="width:100%">
+    </div>
+      
+    <div class="mySlides">
+      <img src="media/0ranmushi.png" style="width:100%">
+    </div>
+  
+    <div class="mySlides">
+      <img src="media/0ranpo.png" style="width:100%">
+    </div>
+      
+    <div class="mySlides">
+      <img src="media/0shockfyo.png" style="width:100%">
+    </div>
+      
+  </div>
+
+  <div class="carouselContainer" style="height: max-content;">
+    <div class="carouselOfImages">
+        <div class="carouselImage" onclick="showSlide(1)"><img src="media/0car.png"></div>
+        <div class="carouselImage" onclick="showSlide(2)"><img src="media/0daz.png"></div>
+        <div class="carouselImage" onclick="showSlide(3)"><img src="media/0fyozai.png"></div>
+        <div class="carouselImage" onclick="showSlide(4)"><img src="media/0ranmushi.png"></div>
+        <div class="carouselImage" onclick="showSlide(5)"><img src="media/0ranpo.png"></div>
+        <div class="carouselImage" onclick="showSlide(6)"><img src="media/0shockfyo.png"></div>
+    </div>
+</div>
+
+  <script>
+    let isDragging = false;
+    let startPositionX = 0;
+    let scrollLeft = 0;
+
+    const carousel = document.querySelector('.carouselOfImages');
+
+    carousel.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startPositionX = e.clientX;
+        scrollLeft = carousel.scrollLeft;
+        carousel.style.scrollBehavior = 'initial';
+    });
+
+    carousel.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const deltaX = e.clientX - startPositionX;
+        carousel.scrollLeft = scrollLeft - deltaX;
+    });
+
+    carousel.addEventListener('mouseup', () => {
+        isDragging = false;
+        carousel.style.scrollBehavior = 'smooth';
+    });
+
+    carousel.addEventListener('mouseleave', () => {
+        isDragging = false;
+        carousel.style.scrollBehavior = 'smooth';
+    });
+
+    function showSlide(n) {
+        const slides = document.getElementsByClassName("mySlides");
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[n - 1].style.display = "block";
+        carousel.scrollLeft = (n - 1) * (carousel.clientWidth / 5);
+    }
+  </script>
+</body>
+</html>

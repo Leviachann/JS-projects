@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://kit.fontawesome.com/503aea22ce.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form 3</title>
+</head>
+<body>
+  <div class="ya">
+    <h1 class="bbt" style=" margin: 0.5em 1.2em">Sign Up</h1>
+    <div class="social"><span class="fbb"><i class="fa-brands fa-google"></i> Sign up with Google</span></div>
+    <hr style="color: #bebebe;width:80%;margin:1em auto;">
+    <form action="#" id="myform">
+      <label class="bbt" style="margin-left: 3em;" for="name">Username<br></label>
+      <input class="bt" type="text" id="full_name" name="username" placeholder="ex.: 'Dazai Osamu'" required><br>
+    <label class="bbt" style="margin-left: 3em;"  for="mail">Email<br></label>
+      <input class="bt" type="text" id="your_email" name="email" placeholder="example@gmail.ru" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}"><br>
+    <label class="bbt" style="margin-left: 3em;" for="password">Password<br></label>
+      <input class="bt" type="password" id="pass" name="password" placeholder="at least 6 characters" required pattern=".{6,}">
+      <div class="chack"><hr class="firstcheck new5"><hr class="secondcheck new5"><hr class="thirdcheck new5"><hr class="fifthcheck new5"></div>
+    <label class="container">
+      <span style="margin-left: 1em;">I agree with <span style="color: #2196F3;">Terms</span> and <span style="color: #2196F3;">Privacy</span></span>
+      <input type="checkbox" checked="none">
+      <span class="checkmark"></span>
+    </label>
+    <input type="submit" value="Sign Up">
+    </form>
+    <hr style="color: #bebebe;width:80%;margin:1em auto;">
+    <p style="text-align: center;">Already have an account?</p>
+    <p style="text-align: center;color: #2196F3;">Login</p>
+  </div>
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<script>
+  function checkPasswordStrength() {
+    var number = /([0-9])/;
+    var alphabets = /([a-zA-Z])/;
+    var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+    var password = $('#pass').val().trim();
+    var firstCheck = $('.firstcheck');
+    var secondCheck = $('.secondcheck');
+    var thirdCheck = $('.thirdcheck');
+    var fifthCheck = $('.fifthcheck');
+
+    firstCheck.css('border-color', 'gray');
+    secondCheck.css('border-color', 'gray');
+    thirdCheck.css('border-color', 'gray');
+    fifthCheck.css('border-color', 'gray');
+
+    if (password.length >= 6) {
+      firstCheck.css('border-color', 'red');
+    }
+      var hasLowercase = password.match(/[a-z]/);
+      var hasUppercase = password.match(/[A-Z]/);
+      var hasNumbers = password.match(/[0-9]/);
+      var hasSpecialChars = password.match(/[~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<]/);
+
+      if (hasLowercase && hasUppercase && hasNumbers && hasSpecialChars) {
+        firstCheck.css('border-color', 'green');
+        secondCheck.css('border-color', 'green');
+        thirdCheck.css('border-color', 'green');
+        fifthCheck.css('border-color', 'green');
+       
+      } else if (hasLowercase && (hasUppercase && hasNumbers) || (hasNumbers && hasSpecialChars) || (hasSpecialChars && hasUppercase)) {
+        firstCheck.css('border-color', 'yellow');
+        secondCheck.css('border-color', 'yellow');
+        thirdCheck.css('border-color', 'yellow');
+
+        
+      } else if (hasLowercase && hasUppercase || hasNumbers || hasSpecialChars){
+        firstCheck.css('border-color', 'orange');
+        secondCheck.css('border-color', 'orange');
+
+        
+      }
+    
+  }
+
+  $(document).ready(function () {
+    $('#myform').validate({
+      errorPlacement: function () {
+        return false;
+      }
+    });
+
+    $('#pass').on('keyup', checkPasswordStrength);
+  });
+;
+	</script>
+</body>
+</html>

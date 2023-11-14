@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Search</title>
+    <style>
+        button{
+            background-color: white;
+            padding: 5px 20px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: #ffffff;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        header input[type="text"] {
+            padding: 5px;
+        }
+        .genre-menu {
+            background-color: #5e5e5e;
+            width: 200px;
+            float: left;
+            padding: 20px;
+        }
+        .genre-menu a {
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+        }
+        .movie-posters {
+            margin-left: 220px;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .movie-card {
+            width: 30%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body onload="resetMovies()">
+    <header>
+        <h1>Movie Search</h1>
+        <input type="text" id="movieTitle" placeholder="Enter a movie title">
+        <button onclick="searchMovies()">Search</button>
+        <button onclick="resetMovies()">Reset</button>
+    </header>
+    <div class="genre-menu">
+        <h2>Genres</h2>
+        <a href="#" onclick="getMoviesByGenre('Action')">Action</a>
+        <a href="#" onclick="getMoviesByGenre('Biography')">Biography</a>
+        <a href="#" onclick="getMoviesByGenre('British')">British</a>
+        <a href="#" onclick="getMoviesByGenre('Classic')">Classic</a>
+        <a href="#" onclick="getMoviesByGenre('Comedy')">Comedy</a>
+        <a href="#" onclick="getMoviesByGenre('Crime')">Crime</a>
+        <a href="#" onclick="getMoviesByGenre('Documentary')">Documentary</a>
+        <a href="#" onclick="getMoviesByGenre('Drama')">Drama</a>
+        <a href="#" onclick="getMoviesByGenre('Family')">Family</a>
+        <a href="#" onclick="getMoviesByGenre('Fantasy')">Fantasy</a>
+        <a href="#" onclick="getMoviesByGenre('Holiday')">Holiday</a>
+        <a href="#" onclick="getMoviesByGenre('Horror')">Horror</a>
+    </div>
+    <div class="movie-posters" id="moviePosters">
+    </div>
+
+    <script>
+        async function searchMovies() {
+            const movieTitle = document.getElementById("movieTitle").value;
+            const url = `http://www.omdbapi.com/?apikey=b3441c60&s=${movieTitle}&plot=full`;
+
+            const response = await fetch(url);
+            const data = await response.json();
+
+            displayMoviePosters(data.Search.slice(0, 6));
+        }
+
+        async function getMoviesByGenre(genre) {
+            const url = `http://www.omdbapi.com/?apikey=b3441c60&s=${genre}&plot=full`;
+
+            const response = await fetch(url);
+            const data = await response.json();
+
+            displayMoviePosters(data.Search.slice(0, 6));
+        }
+
+        async function resetMovies() {
+        const popularMovies = [
+            "The Shawshank Redemption",
+            "The Godfather",
+            "The Dark Knight",
+            "Pulp Fiction",
+            "Schindler's List",
+            "Forrest Gump",
+            "Inception",
+            "Fight Club",
+            "The Matrix",
+            "The Lord of the Rings: The Fellowship of the Ring"
+        ];
+
+        const randomMovies = [];
+        while (randomMovies.length < 10) {
+            const randomIndex = Math.floor(Math.random() * popularMovies.length);
+            if (!randomMovies.includes(popularMovies[randomIndex])) {
+                randomMovies.push(popularMovies[randomIndex]);
+            }
+        }
+
+        const moviePromises = randomMovies.map(async movieTitle => {
+            const url = `http://www.omdbapi.com/?apikey=b3441c60&t=${encodeURIComponent(movieTitle)}&plot=full`;
+            const response = await fetch(url);
+            return response.json();
+        });
+
+        const movieData = await Promise.all(moviePromises);
+        displayMoviePosters(movieData);
+        }
+
+
+        function displayMoviePosters(movies) {
+            const moviePosters = document.getElementById("moviePosters");
+            moviePosters.innerHTML = "";
+
+            movies.forEach(movie => {
+                const card = document.createElement("div");
+                card.classList.add("movie-card");
+                card.innerHTML = `
+                    <img src="${movie.Poster}" alt="${movie.Title}">
+                    <h3>${movie.Title}</h3>
+                    <p>Year: ${movie.Year}</p>
+                `;
+
+                moviePosters.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>

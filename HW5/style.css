@@ -1,0 +1,85 @@
+
+html {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 125%;
+    line-height: 1.4;
+    font-weight: 400;
+    color: #ffffff;
+}
+body {
+    min-height: 100vh;
+    background: #d9e2ec;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+}
+.wrapper {
+    height: 100vh;
+    background-image: url('https://img1.wallspic.com/previews/0/7/9/2/1/112970/112970-universe-outer_space-black-night-galaxy-x750.jpg');
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+}
+.shadow {
+    position: absolute;
+    width: 200vw;
+    height: 200vh;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    background-image: radial-gradient(circle at center, transparent, #000 20%);
+}
+main {
+    max-width: max-content;
+    margin: 3em auto 0 auto;
+    padding: 1.5em;
+    background-color: #101018;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    position: relative; 
+}
+.month-indicator {
+    color: #ffffff;
+    text-align: center;
+    font-weight: 500;
+}
+.day-of-week, .date-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+.day-of-week {
+    margin-top: 1.25em;
+}
+.day-of-week > * {
+    font-size: 0.7em;
+    color: #ffffff;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    font-variant: small-caps;
+    text-align: center;
+}
+.date-grid {
+    margin-top: 0.5em;
+}
+.date-grid button {
+    position: relative;
+    border: 0;
+    width: 4.5ch;
+    height: 4.5ch;
+    border-radius: 50%;
+    background-color: transparent;
+    color: #ffffff;
+}
+.date-grid button:hover, .date-grid button:focus {
+    outline: none;
+    background-color: #f0f4f8;
+    color: #000000;
+}
+.date-grid button:active, .date-grid button.is-selected {
+    background-color: var(--teal-100);
+    color: #ffffff;
+}
+.date-grid button.is-selected {
+    background-color: black;
+    color: white;
+}

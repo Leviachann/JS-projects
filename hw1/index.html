@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://kit.fontawesome.com/503aea22ce.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calc</title>
+</head>
+<body>
+    <div id="mainstruct" class="darkbg">
+        <div id="nightday" class="darkswitch"><a id="sun"  onclick="LightMode()" href="#"><i id="sunicon" class="fa-solid fa-sun"></i></a>
+        <a id="moon" href="#" onclick="DarkMode()"><i id="moonicon" class="fa-solid fa-circle"></i></a></div>
+        <input type="text" id="result" class="darkheadings sdisplay"/>
+        <input type="text" id="calculation" class="darkheadings display"></input>
+        <table>
+            <tr>
+                <td id="clear" class="calcnum operator" data-value="AC">C</td>
+                <td id="percentage" class="calcnum textdark operator" data-value="%">%</td>
+                <td id="backspace" class="calcnum textdark operator" data-value="DEL">D</td>
+                <td id="divide" class="calcnum darkbuttons textdark operator" data-value="/">/</td>
+            </tr>
+            <tr>
+                <td id="seven" class="calcnum textdark" data-value="7">7</td>
+                <td id="eight" class="calcnum textdark" data-value="8">8</td>
+                <td id="nine" class="calcnum textdark" data-value="9">9</td>
+                <td id="multiply" class="calcnum darkbuttons textdark operator" data-value="*">*</td>
+            </tr>
+            <tr>
+                <td id="four" class="calcnum textdark" data-value="4">4</td>
+                <td id="five" class="calcnum textdark" data-value="5">5</td>
+                <td id="six" class="calcnum textdark" data-value="6">6</td>
+                <td id="minus" class="calcnum darkbuttons textdark operator" data-value="-">-</td>
+            </tr>
+            <tr>
+                <td id="one" class="calcnum textdark" data-value="1">1</td>
+                <td id="two" class="calcnum textdark" data-value="2">2</td>
+                <td id="three" class="calcnum textdark" data-value="3">3</td>
+                <td id="plus" class="calcnum darkbuttons textdark operator" data-value="+">+</td>
+            </tr>
+            <tr>
+                <td id="doublezero" class="calcnum textdark" data-value="00">00</td>
+                <td id="zero" class="calcnum textdark" data-value="0">0</td>
+                <td id="dot" class="calcnum textdark" data-value=".">.</td>
+                <td id="equal" class="calcnum darkbuttons textdark operator" data-value="=">=</td>
+            </tr>
+        </table>
+        <hr id="endline" class="linedark">
+        <script src="index.js"></script>
+    </div>
+</body>
+</html>

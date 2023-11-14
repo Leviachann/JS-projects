@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 16 16" shape-rendering="crispEdges">
+<metadata>Made with Pixels to Svg https://codepen.io/shshaw/pen/XbxvNj</metadata>
+<path stroke="#281700" d="M0 0h2M14 0h2M1 1h1M14 1h1M0 2h2M14 2h2M1 3h1M14 3h1M2 4h3M11 4h3M4 5h3M9 5h3M5 6h2M9 6h2" />
+<path stroke="#744502" d="M2 0h1M13 0h1M2 1h2M12 1h2M4 2h1M11 2h1M4 3h2M10 3h2M6 4h1M9 4h1M7 5h2" />
+<path stroke="#300303" d="M3 0h1M6 0h1M9 0h1M12 0h1M0 5h1M15 5h1M15 8h1M0 12h1M15 14h1M0 15h1M13 15h1" />
+<path stroke="#1f0202" d="M4 0h1M7 0h1M10 0h1M15 1h1M0 3h1M0 8h1M15 12h1M0 14h1M2 15h1M15 15h1" />
+<path stroke="#4a0505" d="M5 0h1M8 0h1M11 0h1M0 1h1M15 3h1M0 7h1M15 7h1M0 13h1M15 13h1M1 15h1M14 15h1" />
+<path stroke="rgba(128,128,0,0.00784313725490196)" d="M2 2h1" />
+<path stroke="rgba(116,69,2,0.9921568627450981)" d="M3 2h1M12 2h1" />
+<path stroke="rgba(85,85,0,0.011764705882352941)" d="M13 2h1" />
+<path stroke="rgba(40,23,0,0.996078431372549)" d="M2 3h1M13 3h1" />
+<path stroke="rgba(255,255,255,0.011764705882352941)" d="M3 3h1M5 4h1" />
+<path stroke="rgba(255,255,255,0.00784313725490196)" d="M6 3h1M9 3h1M10 4h1" />
+<path stroke="rgba(255,255,255,0.00392156862745098)" d="M7 3h2" />
+<path stroke="rgba(255,255,255,0.01568627450980392)" d="M12 3h1" />
+<path stroke="#412600" d="M0 4h2M14 4h2M1 5h1M14 5h1M1 6h2M13 6h2M2 8h1M13 8h1M1 9h1M14 9h1" />
+<path stroke="#4f2e00" d="M2 5h2M12 5h2M3 6h2M11 6h2M5 7h2M9 7h2M3 8h1M6 8h4M12 8h1M2 9h1M4 9h3M9 9h3M13 9h1M1 10h2M5 10h1M10 10h1M13 10h2M2 11h4M7 11h2M10 11h4M5 12h2M9 12h2M2 13h2M6 13h1M9 13h1M12 13h2M3 14h3M7 14h2M10 14h3M6 15h1M9 15h1" />
+<path stroke="rgba(65,38,0,0.984313725490196)" d="M0 6h1M15 6h1" />
+<path stroke="rgba(255,255,255,0.03137254901960784)" d="M7 6h1" />
+<path stroke="rgba(255,255,255,0.027450980392156862)" d="M8 6h1" />
+<path stroke="#1a0f01" d="M1 7h2M13 7h2M1 8h1M14 8h1M0 9h1M15 9h1M0 10h1M15 10h1M0 11h2M14 11h2M1 12h1M14 12h1M1 13h1M14 13h1M2 14h1M13 14h1M3 15h3M10 15h3" />
+<path stroke="#3c2203" d="M3 7h2M11 7h2M4 8h2M10 8h2" />
+<path stroke="rgba(116,69,2,0.9882352941176471)" d="M7 7h2" />
+<path stroke="#a91e22" d="M3 9h1M12 9h1M3 10h2M11 10h2" />
+<path stroke="#392104" d="M7 9h2M6 10h4M6 11h1M9 11h1M7 13h2" />
+<path stroke="#301b02" d="M2 12h3M11 12h3M4 13h2M10 13h2M6 14h1M9 14h1M7 15h2" />
+<path stroke="#603a0c" d="M7 12h2" />
+</svg>

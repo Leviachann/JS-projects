@@ -1,0 +1,191 @@
+*{
+    margin: 0;
+    padding: 0;
+    margin: auto;
+    text-align: center;
+    
+}
+*:focus {
+    outline: none;
+    
+}
+
+body{
+    background-color: #42c0f2;
+}
+
+/*main setting IDs*/
+#mainstruct{
+    margin-top: 1em;
+    width: 32%; 
+    border-radius: 30px; 
+    padding-top: 2em;
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+}
+#nightday{
+    width: 22%;
+    padding: 0.3em 0.1em;
+    border-radius: 20px;
+    margin-left:75%;
+}
+#nightday>a{
+    font-size: 2em; 
+} 
+#sun{
+    margin-right:0.9em ;
+}
+#result{
+    font-size: 6em;
+    width:88%;
+    margin-top: 14%;
+    text-align: right;
+    border: none;
+}
+#calculation{
+    font-size: 3em;
+    width:88%;
+    margin-top: 4%;
+    text-align: right;
+    font-weight: lighter;
+    border: none;
+}
+#clear{
+    transition-duration: 1s;
+    transition-property: color;
+    color: #45f0f7;
+    font-weight: bolder;
+}
+#endline{
+    border: 5px solid;
+    border-radius: 5px; 
+    width: 40%;
+    margin-top: 16%;
+}
+
+/*main setting general object*/
+table{
+    width:  95%;
+    text-align: center;
+    font-size: 3em;
+    margin-left: -0.1em;
+    margin-top: 0.5em;
+}
+
+
+/*main setting classes*/
+.calcnum{
+    font-weight: lighter;
+    padding-top: 3%;
+    padding-bottom: 3%;
+ }
+
+/*darkmode settings*/
+.darkbg{
+    background-color: #52646e;
+}
+.textdark{
+    transition-duration: 1s;
+    transition-property: color;
+    color: white;
+}
+.darkheadings{
+    color: white;
+    background-color: #52646e;
+}
+.darkbuttons{
+    transition-duration: 1s;
+    transition-property: background-color;
+    background-color: #48a6cc;
+    border-radius: 100%;
+}
+.darkswitch{
+    background-color: black;
+}
+.darkswitch>a{
+    transition-duration: 1s;
+    transition-property: color;
+    color: #42c0f3;
+} 
+.linedark{
+    color: white;
+}
+/*lightmode settings*/
+.lightbg{
+    background-color: white;
+}
+.textlight{
+    color: #212a2f;
+}
+.lightheadings{
+    color: #45f0f7;
+    background-color: white;
+}
+.lightbuttons{
+    color: #45f0f7;
+    background-color: white;
+}
+.lightswitch{
+    background-color: #42c0f3;
+}
+.lightswitch>a{
+    color: #212a2f;
+}
+.linelight{
+   color: #212a2f;
+}
+
+/* hover objects */
+#clear:hover{
+    transition-property: color;
+    transition-duration: 0.5s;
+    color: #008fb7;
+}
+.calcnum:hover{
+    cursor: pointer;
+}
+
+/* hover objects dark mode */
+.textdark:hover{
+    transition-property: color;
+    transition-duration: 0.5s;
+    color: black;
+}
+.darkswitch>a:hover{
+    transition-property: color;
+    transition-duration: 0.5s;
+    color: white;
+}
+.darkbuttons:hover{
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    background-color: white;
+}
+/* hover objects light mode */
+.textlight:hover{
+    transition-property: color;
+    transition-duration: 0.5s;
+    color: #45f0f7;
+}
+.lightbuttons:hover{
+    background-color: #212a2f;
+}
+
+@media(max-width: 768px) {
+    #mainstruct{
+        width: 100%;
+    }
+    #nightday{
+        width:40%;
+        margin-left:56%;
+    }
+}
+@media(min-width: 769px)and (max-width: 1610px) {
+    #mainstruct{
+        width: 70%;
+    }
+    #nightday{
+        width:40%;
+        margin-left:56%;
+    }
+}
